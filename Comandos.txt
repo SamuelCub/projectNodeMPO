@@ -1,0 +1,31 @@
+#Node creación de aplicación, despliegue y arranque en servidor
+npm init -y
+npm i express
+npm start
+
+http://localhost:3000
+http://localhost:3000/health
+
+#Comandos docker
+#Cración de imagen docker, con nombre docker-node-app y versión 1.0 utilizando el Dockerfile que está en el directorio actual
+docker build -t docker-node-app:1.0 .
+
+#Arranca un contenedor a partir de una imagen, que cuando se pare se borra solo, que conecta el puerto 3000 del host con el puerto 3000 del contenedor utilizando la imagen docker-node-app v1.0
+docker run --rm -p 3000:3000 docker-node-app:1.0
+
+#Muestra los logs del contenedor (la salida estandar, es decir, lo que imprime la app Node.js)
+docker logs -f nodeapp
+
+#Para el contenedor y luego lo borra
+docker stop nodeapp
+docker rm nodeapp
+docker ps
+
+#Imagenes
+docker images
+
+#Borrar imágenes. Es necesario que no haya ningún contenedor creado con esa imagen aunque esté parado.
+docker rmi docker-node-app:1.0
+
+#Instalación de node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
